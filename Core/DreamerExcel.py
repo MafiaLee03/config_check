@@ -134,10 +134,10 @@ class DreamerExcel:
         self._current_sheet = sheet_name
         value_row = self._value_dict.get(sheet_name)
         # is_start = False
-        # is_end = False
+        is_end = False
         for i in range(value_row, work_sheet.max_row + 1):
-            # if is_end:
-            #     break
+            if is_end:
+                break
             # flag_cell = work_sheet.cell(row=i, column=1)
             # if flag_cell.value == "start":
             #     is_start = True
@@ -156,6 +156,8 @@ class DreamerExcel:
                     if cell.value == None:
                         # 空行数据跳过
                         is_empty = True
+                        is_end = True
+                        # 梦伽HA项目需求有一行id为空后面的就都不导表了，相当于之前tkw的配置了end
                         break
                 try:
                     value = self.format_cell(key_schema, cell.value)
