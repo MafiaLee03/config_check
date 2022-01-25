@@ -68,14 +68,3 @@ class SvnRecord:
         result = filter(check_xlse,file_list)
         # print(list(result))
         return result
-
-# a = subprocess.getoutput('svn log -l1 https://desktop-11egl1h:8443/svn/NeoOPM/SVN/Config/Master')
-# print(a)
-# print(re.search('(?<=r).*?(?= )',a).group(0))
-a = SvnRecord('https://desktop-11egl1h:8443/svn/NeoOPM/SVN/Config/Master')
-# a.get_svn_log_last()
-# print(a.get_reverson())
-# f = open('lastreverson.txt','w')
-# f.write(a.get_reverson())
-# f.close()
-a.change_file('C:/config/Master')

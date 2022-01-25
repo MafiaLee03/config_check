@@ -1,5 +1,6 @@
 #coding=utf-8
 from Core.Container import Container
+from Core.Logger import *
 import os
 from Core.Util import *
 class BaseCase:
@@ -21,6 +22,10 @@ class BaseCase:
 
     def run(self):
         pass
+    
+    def flybook_assert(self,is_correct,msg):
+        if not is_correct:
+            flyBook(msg)
 
     def do_assert(self, is_correct, msg, record, comment=None):
         if is_correct:

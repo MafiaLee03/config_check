@@ -90,7 +90,7 @@ def main_svn():
             test("DreamerCase",os.path.splitext(i)[0]+'Case')
             print(i+'表检查完成')
         except:
-            logger.logWarning('没有{0}表的检查用例'.format(i))
+            logger.flyBook('没有{0}表的检查用例'.format(i)) # <at user_id="ou_xxx">用户名</at>
             if i not in not_check:
                 not_check.append(i)
     config_json["svn_reverson"] = svn_config._reverson_now
@@ -102,6 +102,6 @@ if __name__ == "__main__":
     scheduler = BlockingScheduler()
     scheduler.add_job(main_svn,'interval', minutes = 10)
     scheduler.start()
-    test("Arena", "ArenaRobotCase")
+    # test("Arena", "ArenaRobotCase")
     # main()
     # check_self()
