@@ -1,7 +1,7 @@
 #coding=utf-8
 from Core.BaseCase import BaseCase
 
-class ArenaRobotCase(BaseCase):
+class LanguageCase(BaseCase):
     """
     ArenaRobot表检查
     """

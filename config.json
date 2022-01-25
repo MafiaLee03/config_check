@@ -1,5 +1,1 @@
-{
-"config_root" : "C:/config/Master",
-"report_root" : "C:/report",
-"res_root" : "C:/config"
-}
+{"config_root": "C:/config/Master", "report_root": "C:/report", "res_root": "C:/config", "svn_root": "https://desktop-11egl1h:8443/svn/NeoOPM/SVN/Config/Master", "svn_reverson": "283", "not_check": ["Hero_Quality.xlsx", "Bounty_Group.xlsx", "MailConfig.xlsx", "Data_Setting.xlsx", "Refresh.xlsx", "Skill_Base.xlsx"]}
