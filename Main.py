@@ -56,7 +56,7 @@ def test(category, clss):
     print("cost:", time.time() - start)
 
 if __name__ == "__main__":
-    test("Arena", "HaArenaRewardRankCase")
+    test("DreamerCase", "Arena_Reward_RankCase")
     # main()
     # check_self()
 

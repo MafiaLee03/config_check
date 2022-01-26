@@ -11,6 +11,7 @@ class Container:
     """
     所有的表对象都靠 Container来维护
     """
+    table_name = ''
     pool = {}
     _config = {}
     exceptions = []
