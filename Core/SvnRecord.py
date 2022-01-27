@@ -43,9 +43,9 @@ class SvnRecord:
         result = self._not_check
         for i in cha_list:
             filename = os.path.split(i)[1]
-            if filename not in result:
-                result.append(filename)
-        return result
+            result.append(filename)
+            
+        return set(result)
     def change_file(self,config_root):
         '''
         上次记录的版本到最新的svn提交之间变化的excel文件，如果没有返回全部excel文件

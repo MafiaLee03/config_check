@@ -16,6 +16,7 @@ class Container:
     _config = {}
     exceptions = []
     _loader = None
+    need_recheck = False
 
     @classmethod
     def set_loader(clz, loader):
@@ -175,5 +176,6 @@ class Container:
         instance = module.__dict__[clss](clss, category)
         instance.run()
         instance.dump_detail_report(report_root)
+        clz.need_recheck = instance.get_fail_case()
 
 

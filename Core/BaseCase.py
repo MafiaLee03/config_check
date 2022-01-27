@@ -14,6 +14,7 @@ class BaseCase:
         self._level = 1 #TODO 这里做枚举，用于区分用例的级别
         self._name = name
         self._category = category
+        self._fail_case = False
 
     def add_depends(self, table_name):
         table_obj = Container.find_table(table_name)
@@ -25,7 +26,11 @@ class BaseCase:
     
     def flybook_assert(self,is_correct,msg):
         if not is_correct:
+            self._fail_case = True
             flyBook(msg)
+
+    def get_fail_case(self):
+        return self._fail_case
 
     def do_assert(self, is_correct, msg, record, comment=None):
         if is_correct:

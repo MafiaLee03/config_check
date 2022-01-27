@@ -66,8 +66,9 @@ def test(category, clss):
     Container.merge_reward()
     start = time.time()
     print("cost:", time.time() - start)
-    Container.test_one(category, clss)    
+    Container.test_one(category, clss) 
     print("cost:", time.time() - start)
+    return Container.need_recheck
 
 def main_svn():
     config_json = get_root()
@@ -87,8 +88,8 @@ def main_svn():
     file = svn_config.change_file(config_root)
     for i in file:
         try:
-            test("DreamerCase",os.path.splitext(i)[0]+'Case')
-            print(i+'表检查完成')
+            if test("DreamerCase",os.path.splitext(i)[0]+'Case'):
+                not_check.append(i)
         except:
             logger.flyBook('没有{0}表的检查用例'.format(i)) # <at user_id="ou_xxx">用户名</at>
             if i not in not_check:
