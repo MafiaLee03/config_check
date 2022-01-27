@@ -64,13 +64,15 @@ def test(category, clss):
     init()
     Container.merge_translate()
     Container.merge_reward()
-    start = time.time()
-    print("cost:", time.time() - start)
+    # start = time.time()
+    # print("cost:", time.time() - start)
     Container.test_one(category, clss) 
-    print("cost:", time.time() - start)
-    return Container.need_recheck
+    # print("cost:", time.time() - start)
 
 def main_svn():
+    init()
+    Container.merge_translate()
+    Container.merge_reward()
     config_json = get_root()
     svn_root     = config_json["svn_root"]
     config_root  = config_json["config_root"]
@@ -88,20 +90,20 @@ def main_svn():
     file = svn_config.change_file(config_root)
     for i in file:
         try:
-            if test("DreamerCase",os.path.splitext(i)[0]+'Case'):
-                not_check.append(i)
+            Container.test_one("DreamerCase",os.path.splitext(i)[0]+'Case')
         except:
             logger.flyBook('没有{0}表的检查用例'.format(i)) # <at user_id="ou_xxx">用户名</at>
-            if i not in not_check:
-                not_check.append(i)
+            not_check.append(i)
+        if Container.need_recheck:
+            not_check.append(i)
     config_json["svn_reverson"] = svn_config._reverson_now
-    config_json["not_check"] = not_check
+    config_json["not_check"] = list(set(not_check))
     write_json(config_json)
 
 if __name__ == "__main__":
     main_svn()
     scheduler = BlockingScheduler()
-    scheduler.add_job(main_svn,'interval', minutes = 10)
+    scheduler.add_job(main_svn,'interval', seconds = 10)
     scheduler.start()
     # test("Arena", "ArenaRobotCase")
     # main()

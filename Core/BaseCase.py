@@ -1,5 +1,6 @@
 #coding=utf-8
 from Core.Container import Container
+from collections import Counter
 from Core.Logger import *
 import os
 from Core.Util import *
@@ -92,7 +93,10 @@ class BaseCase:
         for record in table_obj.get_records():
             i = record._dict[key]
             list_key.append(i)
-        self.flybook_assert(len(list_key) == len(set(list_key)),'{0}表{1}列有重复值'.format(name,key))
+        dict_key = dict(Counter(list_key))
+        value = [key for key,value in dict_key.items() if value > 1]
+        if len(list_key) != len(set(list_key)):
+            self.flybook_assert(0,'{0}表{1}列有重复值{2}'.format(name,key,value))
 
     def a_in_b(self,table_obj_a,table_obj_b,keya,keyb = 'id',va = 0,vb = 0):
         '''
