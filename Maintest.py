@@ -4,7 +4,7 @@
 '''
 libiqi 20220124 新增main_svn，只检查 有变化的配表 和 没检查过的配表
 '''
-from apscheduler.schedulers.blocking import BlockingScheduler
+# from apscheduler.schedulers.blocking import BlockingScheduler
 import time
 from Core.Container import Container
 from Core.Loader import Loader
@@ -102,9 +102,9 @@ def main_svn():
 
 if __name__ == "__main__":
     main_svn()
-    scheduler = BlockingScheduler()
-    scheduler.add_job(main_svn,'interval', seconds = 10)
-    scheduler.start()
+    # scheduler = BlockingScheduler()
+    # scheduler.add_job(main_svn,'interval', seconds = 10)
+    # scheduler.start()
     # test("Arena", "ArenaRobotCase")
     # main()
     # check_self()
