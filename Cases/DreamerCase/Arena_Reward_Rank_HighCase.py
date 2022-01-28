@@ -9,7 +9,4 @@ class Arena_Reward_Rank_HighCase(BaseCase):
         self.add_depends('Arena_Reward_Rank_High')
         Arena_Reward_Rank_High = self._Arena_Reward_Rank_High
         self.tag_repeat(Arena_Reward_Rank_High,'id')
-        for record in Arena_Reward_Rank_High.get_records():
-            i = record.id
-            rank = record._dict['rank']
-            self.flybook_assert(rank[0]<=rank[1],'Arena_Reward_Rank_High表中rank区间错误，左大于右了 值：{0} id：{1}'.format(rank,i))
+        self.rank_check(Arena_Reward_Rank_High,'rank')

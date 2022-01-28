@@ -126,3 +126,21 @@ class BaseCase:
             else:
                 i = str(i[va])
             self.flybook_assert(i in list_key_b,'{0}表中{1}配置错误,在{2}表{3}列找不到 值：{4} id：{5}'.format(namea,keya,nameb,keyb,i,id_a))
+
+    def rank_check(self,table_obj,key):
+        '''
+        排名类配表检查，检查内容：1、排名区间左大于右 2、排名区间无重合或缝隙
+        '''
+        name = table_obj._table_name
+        rank_list = []
+        for record in table_obj.get_records():
+            i = record.id
+            rank = record._dict[key]
+            rank_list.append(rank)
+            self.flybook_assert(rank[0]<=rank[1],'{0}表中{1}区间错误，左大于右了 值：{2} id：{3}'.format(name,key,rank,i))
+        rank_list = sorted(rank_list,key = lambda x:x[0])
+        for i in range(len(rank_list) - 1):
+            if rank_list[i][1] + 1 < rank_list[i+1][0]:
+                self.flybook_assert(0,'{2}表{3}列排名区间有缝隙，可能出现某名次不落在任何区间 区间：{0} {1}'.format(rank_list[i],rank_list[i+1],name,key))
+            elif rank_list[i][1] + 1 > rank_list[i+1][0]:
+                self.flybook_assert(0,'{2}表{3}列排名区间有重合 重合区间：{0} {1}'.format(rank_list[i],rank_list[i+1],name,key))
