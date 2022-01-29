@@ -18,7 +18,7 @@ class SvnRecord:
         '''
         取svn最后一条提交记录
         '''
-        self._svn_log_last = subprocess.getoutput('svn log -l1 '+ self._url)
+        self._svn_log_last = subprocess.getoutput('cd C:/Program Files/TortoiseSVN/bin&svn log -l1 '+ self._url)
     
     def get_reverson(self):
         '''
@@ -38,7 +38,7 @@ class SvnRecord:
         '''
         输入两个版本号，返回两个版本变化文件的list + 没写用例或其他导致之前没检查的表
         '''
-        ver_str = subprocess.getoutput('svn log -r {0}:{1} -v {2}'.format(start,now,self._url))
+        ver_str = subprocess.getoutput('cd C:/Program Files/TortoiseSVN/bin&svn log -r {0}:{1} -v {2}'.format(start,now,self._url))
         cha_list = re.findall('(?<=SVN).*?(?=\n)',ver_str)
         result = self._not_check
         for i in cha_list:

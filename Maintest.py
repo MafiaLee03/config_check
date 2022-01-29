@@ -83,7 +83,7 @@ def main_svn():
     if svn_config._reverson_now == svn_reverson:
         print('没人提交')
         return
-    os.system('svn update '+ svn_root)
+    # os.system('svn update '+ svn_root)
     svn_config.set_last_check_reverson(svn_reverson)
     svn_config.set_not_check(not_check)
     not_check = []
@@ -92,7 +92,7 @@ def main_svn():
         try:
             Container.test_one("DreamerCase",os.path.splitext(i)[0]+'Case')
         except:
-            logger.flyBook('没有{0}表的检查用例'.format(i)) # <at user_id="ou_xxx">用户名</at>
+            # logger.flyBook('没有{0}表的检查用例'.format(i)) # <at user_id="ou_xxx">用户名</at>
             not_check.append(i)
         if Container.need_recheck:
             not_check.append(i)
