@@ -1,16 +1,28 @@
-import requests
-import json
-def fly_book(message):
-    url = 'https://open.feishu.cn/open-apis/bot/v2/hook/ce0dc2c7-1b5e-479c-a9f0-b8c2a53ee421'
-    payload_message = {
-    "msg_type": "text",
-    "content": {
-        "text": message
-        }
-    }
-    headers = {
-        'Content-Type': 'application/json'
-    }
+import socket
+import threading
+import time
 
-    requests.request("POST", url, headers=headers, data=json.dumps(payload_message))
-fly_book('nihao')
+s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.bind(('127.0.0.1',9999))
+s.listen(5)
+def tcplink(sock, addr):
+    print('Accept new connection from %s:%s...' % addr)
+    print(addr)
+    sock.send(b'Welcome!')
+    while True:
+        data = sock.recv(1024)
+        time.sleep(1)
+        if not data or data.decode('utf-8') == 'exit':
+            break
+        sock.send(('Hello, %s!' % data.decode('utf-8')).encode('utf-8'))
+    sock.close()
+    print('Connection from %s:%s closed.' % addr)
+while True:
+    # 接受一个新连接:
+    print(111111111111)
+    sock, addr = s.accept()
+    print(2222222222)
+    # 创建新线程来处理TCP连接:
+    t = threading.Thread(target=tcplink, args=(sock, addr))
+    print(3333333)
+    t.start()
